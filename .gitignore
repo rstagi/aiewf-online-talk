@@ -1,0 +1,7 @@
+node_modules
+dist
+*.local
+.DS_Store
+
+# internal talk-prep working docs — kept local, not published with the deck
+0[0-9]-*.md
