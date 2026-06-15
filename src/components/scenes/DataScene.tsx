@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import type { DataSlide } from '../../data/slides'
 import { renderRich } from '../core/rich'
-import { PythonRisingBars, CrossoverLines, GrowthLine } from '../charts'
+import { CrossoverLines, GrowthLine } from '../charts'
 
 /* Folios 7, 10, 12, 13 — the records. Clean editorial: assertion headline,
    one decluttered chart, a sourced caption. Light chrome, no world overlay. */
@@ -56,7 +56,6 @@ export function DataScene({ content }: { content: DataSlide['content'] }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        {content.chart === 'pythonRising' && <PythonRisingBars />}
         {content.chart === 'crossover' && <CrossoverLines />}
         {content.chart === 'growth' && <GrowthLine />}
       </motion.div>

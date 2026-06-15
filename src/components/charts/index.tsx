@@ -8,31 +8,6 @@ const LBL = {
 } as const
 const TINY = { fontFamily: 'var(--talk-font-mono)', fontSize: '18px' } as const
 
-// ── Folio 7 ─ Python rising (the concession) ──────────────────────────────
-export function PythonRisingBars() {
-  const yOf = (v: number) => 360 - (v / 60) * 290
-  return (
-    <svg viewBox="0 0 760 420" width="100%" style={{ display: 'block', overflow: 'visible' }}>
-      <line x1="120" y1="360" x2="640" y2="360" stroke="var(--talk-rule)" strokeWidth="2" />
-
-      {/* 2024 — non-focal */}
-      <rect x="190" y={yOf(51)} width="130" height={360 - yOf(51)} fill="var(--talk-muted)" opacity="0.55" />
-      <text x="255" y={yOf(51) - 14} textAnchor="middle" fill="var(--talk-muted)" {...LBL}>51%</text>
-      <text x="255" y="392" textAnchor="middle" fill="var(--talk-muted)" {...LBL}>2024</text>
-
-      {/* 2025 — takeaway, Python's color */}
-      <rect x="430" y={yOf(57.9)} width="130" height={360 - yOf(57.9)} fill="var(--talk-accent-2)" />
-      <text x="495" y={yOf(57.9) - 42} textAnchor="middle" fill="var(--talk-accent-2)" {...TINY}>+7 pts ↑</text>
-      <text x="495" y={yOf(57.9) - 14} textAnchor="middle" fill="var(--talk-accent-2)" {...LBL}>58%</text>
-      <text x="495" y="392" textAnchor="middle" fill="var(--talk-ink)" {...LBL}>2025</text>
-
-      <text x="360" y="16" textAnchor="middle" fill="var(--talk-muted)" {...TINY}>
-        stated usage · the survey’s biggest single-year jump
-      </text>
-    </svg>
-  )
-}
-
 // ── Folio 10 ─ the crossover ───────────────────────────────────────────────
 export function CrossoverLines() {
   const x = (t: number) => 140 + 560 * t

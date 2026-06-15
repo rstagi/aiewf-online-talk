@@ -132,6 +132,21 @@ export function StatementScene({ content, subStep }: { content: StatementSlide['
           ))}
         </div>
       )}
+
+      {content.source && (
+        <p
+          style={{
+            fontFamily: 'var(--talk-font-mono)',
+            fontSize: 'var(--fs-kicker)',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            color: 'var(--talk-muted)',
+            marginTop: content.compact ? '2.6cqh' : '3.4cqh',
+          }}
+        >
+          Source · {content.source}
+        </p>
+      )}
     </div>
   )
 }

@@ -2,7 +2,7 @@ import type { HouseKey } from './houses'
 import type { SlideNotes } from '../components/core/PresenterNotes'
 
 /* ===========================================================================
-   The 24 folios. Assertion titles are verbatim from 02-slides-content.md;
+   The 29 folios. Assertion titles are verbatim from 02-slides-content.md;
    cue cards verbatim from 03-delivery-plan.md. Spine is locked upstream —
    this file is content, not argument.
 
@@ -21,7 +21,7 @@ import type { SlideNotes } from '../components/core/PresenterNotes'
    2025 (the coding agents grew up: Lovable/Claude Code/Cursor/Codex); slide 14
    carries the agentic-demand so-what. The old "they meant opposite things"
    framing is retired.
-   A "this is just the beginning" future beat (slide 22) now precedes the CTA.
+   A "this is just the beginning" future beat (slide 26) now precedes the CTA.
    =========================================================================== */
 
 export type SceneType =
@@ -105,6 +105,7 @@ export interface StatementSlide extends BaseSlide {
     revealAsSubhead?: boolean
     anchor?: string // muted line, appears after the reveal
     coda?: string // muted body line, staged in below the anchor (the final aside)
+    source?: string // muted source microcredit rendered at the slide foot
     raven?: boolean
     image?: string // optional screenshot/receipt rendered under the line (e.g. the Bun acquisition)
     imageAlt?: string
@@ -125,6 +126,7 @@ export interface SplitSlide extends BaseSlide {
     note?: string
     /** tighten type sizes + gaps so a denser split (more rows + a note) fits */
     compact?: boolean
+    source?: string // muted source microcredit rendered at the slide foot
   }
 }
 
@@ -136,7 +138,7 @@ export interface RoadSlide extends BaseSlide {
   }
 }
 
-export type ChartKind = 'pythonRising' | 'crossover' | 'growth'
+export type ChartKind = 'crossover' | 'growth'
 
 export interface DataSlide extends BaseSlide {
   type: 'data'
@@ -164,6 +166,7 @@ export interface BannermenSlide extends BaseSlide {
     assertion: string
     houses: { name: string; scale: number }[]
     callout: string
+    source?: string // muted source microcredit rendered at the slide foot
   }
 }
 
@@ -376,7 +379,7 @@ export const slides: Slide[] = [
     notes: {
       cues: [
         '“Brain = pip · App = npm” · anchor: train / research / GPU serving → Python vs agent / UI / deploy → TypeScript',
-        'Open the book by conceding: Python genuinely owns the brain. [PAUSE] after. This split is the honest spine; callback on slide 18.',
+        'Open the book by conceding: Python genuinely owns the brain. [PAUSE] after. This split is the honest spine; callback on slide 27.',
       ],
     },
   },
@@ -483,7 +486,7 @@ export const slides: Slide[] = [
     type: 'statement',
     steps: 1,
     content: {
-      main: 'And now every new app is an <em>agent</em>, hungry to embed AI.',
+      main: 'And now nearly every new app is an <em>agent</em>, hungry to embed AI.',
       reveal: 'That demand lands on one stack: <ts>TypeScript</ts>.',
       revealBlock: true,
       anchor: 'Build your agent’s app layer in <py>Python</py> and you’re on your own. Build it in <ts>TypeScript</ts> and the whole realm builds with you.',
@@ -514,17 +517,18 @@ export const slides: Slide[] = [
         { name: 'Lovable', scale: 1.05 },
         { name: 'CopilotKit', scale: 0.9 },
       ],
-      callout: 'MCP servers ship ~2.5× more on npm than PyPI · schema authored TypeScript-first.',
+      callout: 'TypeScript is the most common language for MCP servers · schema authored <ts>TypeScript-first</ts>.',
+      source: 'MCP server census (arXiv 2506.13538) · MCP spec',
     },
     notes: {
       cues: [
         '(up) pace through the wall: “AI SDK · Mastra · Cloudflare Agents · Claude Code · v0 · Cursor · Bolt · Lovable”',
-        'callout: MCP servers · ~2.5× more on npm · schema authored TypeScript-first',
+        'callout: TypeScript is the most common MCP server language (census arXiv 2506.13538: TS 227 / Python 196 / JS 115 of 583) · schema authored TypeScript-first. (Dropped the unsourceable ~2.5× npm-vs-PyPI multiplier.)',
       ],
     },
   },
 
-  // 17 — Statement: the raven (Anthropic buys Bun) — trimmed to the fact + the
+  // 16 — Statement: the raven (Anthropic buys Bun) — trimmed to the fact + the
   // receipt. Moved ahead of the registry beat as the proof the app layer is moving.
   {
     id: 'raven-bun',
@@ -546,7 +550,7 @@ export const slides: Slide[] = [
     },
   },
 
-  // 18 — Statement: the honest question that pivots into the case. Pose it, then
+  // 17 — Statement: the honest question that pivots into the case. Pose it, then
   // preview the three reasons the next slides each pay off.
   {
     id: 'does-it-make-sense',
@@ -565,7 +569,7 @@ export const slides: Slide[] = [
     },
   },
 
-  // 19 — Statement: the flywheel. AI scaffolds and builds in TS by default, which
+  // 18 — Statement: the flywheel. AI scaffolds and builds in TS by default, which
   // feeds more TS into the models, which scaffold even more TS — a self-reinforcing loop.
   {
     id: 'ts-flywheel',
@@ -575,18 +579,19 @@ export const slides: Slide[] = [
       kicker: 'Why yes',
       compact: true,
       main: 'AI already scaffolds and builds in <ts>TypeScript</ts> by default.',
-      reveal: 'More TS code trains better TS models, which scaffold even more TS. A self-reinforcing cycle.',
+      reveal: 'More code in the world plausibly feeds back into the next models. A loop you would expect.',
       revealAsSubhead: true,
+      source: 'Defaults: v0 · Lovable · Bolt, 2026',
     },
     notes: {
       cues: [
-        'The coding agents reach for TypeScript first: v0, Lovable, Bolt all emit React + TS out of the box.',
-        'Name the loop: more TS in the world trains better TS models, which scaffold even more TS. A flywheel that keeps turning the app layer one way.',
+        'The coding agents reach for TypeScript first: v0, Lovable, Bolt all emit React + TS out of the box. (This half is verified.)',
+        'Name the loop, but HEDGE it: more code in the world plausibly feeds back into the next models, a loop you would expect. Do NOT claim a proven TS-specific flywheel: the research (CodeM) shows training on any language, even HTML, lifts the others, and gains track raw code volume.',
       ],
     },
   },
 
-  // 20 — Statement: the registry — concede the ML core to PyPI, then claim the
+  // 19 — Statement: the registry — concede the ML core to PyPI, then claim the
   // app-layer integration tail for npm (breadth of SDKs, NOT raw count = quality).
   {
     id: 'npm-registry',
@@ -598,18 +603,19 @@ export const slides: Slide[] = [
       main: 'For the model, <py>PyPI</py> wins. For everything around it, you reach into <ts>npm</ts>.',
       reveal: 'Auth, payments, UI, SaaS, infra: the deepest app-layer tail there is.',
       revealBlock: true,
-      anchor: 'npm ~5.6M packages vs PyPI ~820K. Not better code, broader reach: the integrations an app glues together ship JS-first.',
+      anchor: 'npm ~3M packages vs PyPI ~820K. Not better code, broader reach: the integrations an app glues together treat JS as first-class.',
+      source: 'npm registry + PyPI, distinct packages, 2026',
     },
     notes: {
       cues: [
-        'Concede FIRST: for the model and the ML core, torch, transformers, the inference stack, PyPI wins and is pulling ahead (+50% YoY). That is not the argument.',
-        'The argument is the app layer: Stripe, OAuth, Slack, Postgres, the UI kit, they ship JS/TS-first. npm ~5.6M vs PyPI ~820K (Sonatype 2026), about 7×.',
-        'Say it straight, so it’s not a vanity stat: I’m NOT claiming count equals quality, npm even carries most of the registry’s malware. I’m claiming the maintained integrations you reach for are broader and more first-class on npm.',
+        'Concede FIRST: for the model and the ML core, torch, transformers, the inference stack, PyPI wins and is still growing fast. That is not the argument.',
+        'The argument is the app layer: auth, UI, SaaS, the integrations an app glues together treat JS as first-class (Slack Bolt shipped JS-first; the UI kits are JS-native). npm has several times more distinct packages than PyPI: roughly 3 million to 820 thousand. (Do NOT say “ship JS-first” as a blanket: Stripe is Ruby-first.)',
+        'Say it straight, so it’s not a vanity stat: I’m NOT claiming count equals quality, npm even carries most of the registry’s malware (Sonatype 2026: over 99% of new open-source malware is on npm). I’m claiming the maintained integrations you reach for are broader and more first-class on npm.',
       ],
     },
   },
 
-  // 19 — Split: one codebase vs two services. The whole agentic app in one
+  // 20 — Split: one codebase vs two services. The whole agentic app in one
   // TypeScript deploy unit; in Python it is structurally two. The kicker: even
   // Reflex (pure-Python UI) compiles to React + a stateful FastAPI/Redis backend.
   {
@@ -617,7 +623,7 @@ export const slides: Slide[] = [
     type: 'split',
     steps: 0,
     content: {
-      assertion: 'In TypeScript the whole agent is one codebase and one deploy; in Python it is always two.',
+      assertion: 'In TypeScript the whole agent is one codebase and one deploy; in Python it is usually two.',
       left: {
         label: 'One codebase, one deploy',
         house: 'typescript',
@@ -633,13 +639,13 @@ export const slides: Slide[] = [
     notes: {
       cues: [
         'Concede: two services is the normal, battle-tested BFF, FastAPI + React is fine, and PydanticAI’s types are real. This is NOT about capability.',
-        'It’s topology: one language, one type system, one stateless deploy. anchor: even Reflex is React + FastAPI + Redis under the hood, so you keep two processes and lose serverless/edge.',
-        'Never say Python can’t ship agentic UIs. Say: in TypeScript it’s one codebase, one deploy.',
+        'It’s topology, not capability: one language, one type system, one stateless deploy. Even Reflex (the “pure Python” UI) compiles to React/Next.js + FastAPI + Redis, so you keep two processes and lose serverless/edge.',
+        'Never say Python can’t ship agentic UIs, and don’t over-generalize: NiceGUI and Streamlit run as one process, PyScript runs in-browser. Say: the typical Python agent stack is two deploys; in TypeScript it’s one.',
       ],
     },
   },
 
-  // 20 — Road: one type to the browser
+  // 21 — Road: one type to the browser
   {
     id: 'one-type',
     type: 'road',
@@ -652,12 +658,12 @@ export const slides: Slide[] = [
       cues: [
         '“One type · tool call → browser” · anchor: Python’s type checker stops at the process boundary',
         'honest: “PydanticAI is genuinely typed. [PAUSE] this isn’t about types existing, it’s about crossing the browser.” The objection agrees with me.',
-        'Receipt: the AG-UI Python and TypeScript SDKs literally drifted (bug #1169, one event’s role field disagreed on the wire). The kind of bug that only exists when two type sets track one spec. Fixed, but it proves the seam.',
+        'Receipt: AG-UI’s Python and TypeScript SDKs drifted (issue #1169): the ReasoningMessageStartEvent role was “assistant” in Python but “reasoning” in TypeScript, so the TypeScript Zod parser rejected the Python event on the wire. Opened Feb 2026, now fixed, but it proves the seam.',
       ],
     },
   },
 
-  // 21 — Code: one Zod schema
+  // 22 — Code: one Zod schema
   {
     id: 'zod-code',
     type: 'code',
@@ -673,7 +679,7 @@ export const slides: Slide[] = [
     },
   },
 
-  // 24 — Data: AI SDK 7x growth — the last piece of evidence (the fast-growing
+  // 23 — Data: AI SDK 7x growth — the last piece of evidence (the fast-growing
   // TS AI ecosystem) before the scoreboard counts it all off.
   {
     id: 'sdk-growth',
@@ -682,14 +688,14 @@ export const slides: Slide[] = [
     content: {
       assertion: 'The TypeScript-only AI SDK grew about 7× in a single year.',
       chart: 'growth',
-      source: 'Vercel (Series F) · npm download counter · year to 30 Sep 2025',
+      source: 'npm download counts · year to 30 Sep 2025',
     },
     notes: {
       cues: ['“Vercel AI SDK · TS-only · ~7×” · anchor: 446K → 3.2M weekly'],
     },
   },
 
-  // 25 — Recap: the app-layer scoreboard, counted off (the capstone of the case
+  // 24 — Recap: the app-layer scoreboard, counted off (the capstone of the case
   // before the honest pip/npm turn). All five land in the riser accent.
   {
     id: 'recap',
@@ -714,7 +720,7 @@ export const slides: Slide[] = [
     },
   },
 
-  // 23 — Quote: Atwood’s Law (the prophecy)
+  // 25 — Quote: Atwood’s Law (the prophecy)
   {
     id: 'prophecy',
     type: 'quote',
@@ -729,7 +735,7 @@ export const slides: Slide[] = [
     },
   },
 
-  // 24 — Statement: the future beat — this is just the beginning (raise the
+  // 26 — Statement: the future beat — this is just the beginning (raise the
   // stakes before the CTA; sets up "build alone" on the close).
   {
     id: 'just-beginning',
@@ -750,26 +756,26 @@ export const slides: Slide[] = [
     },
   },
 
-  // 25 — Statement: pip vs npm (the honest turn)
+  // 27 — Statement: pip vs npm (the honest turn)
   {
     id: 'pip-npm',
     type: 'statement',
     steps: 1,
     content: {
       main: 'The model runs on <py>pip</py>. The agent that calls it ships on <ts>npm</ts>.',
-      anchor: 'vLLM · TGI · ~85% of open-model inference, all Python.',
+      anchor: 'vLLM · SGLang · the vast majority of open-model inference, Python-led.',
       coda: 'Everything else? Probably all <ts>TypeScript</ts>.',
     },
     notes: {
       cues: [
-        '“Kill the overclaim, honest” · anchor: vLLM · TGI · ~85% of open-model inference, all Python',
+        '“Kill the overclaim, honest” · anchor: vLLM · SGLang · the vast majority of open-model inference, Python-led. (TGI was archived in 2026; the old “~85%” has no clean source, and “all Python” is false — TGI was part-Rust.)',
         '[PAUSE] “The model runs on pip. The agent that calls it ships on npm.” (slow). The clean turn before the finale.',
         '[PAUSE] then land the punchline: “And everything above that? Probably it’s going to be TypeScript.”',
       ],
     },
   },
 
-  // 26 — Throne: the call to arms (CTA)
+  // 28 — Throne: the call to arms (CTA)
   {
     id: 'call-to-arms',
     type: 'throne',
@@ -787,7 +793,7 @@ export const slides: Slide[] = [
     },
   },
 
-  // 27 — Title: the close
+  // 29 — Title: the close
   {
     id: 'close',
     type: 'title',

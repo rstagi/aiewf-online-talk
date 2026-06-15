@@ -63,6 +63,21 @@ export function SplitScene({ content }: { content: SplitSlide['content'] }) {
           {renderRich(content.note)}
         </p>
       )}
+
+      {content.source && (
+        <p
+          style={{
+            fontFamily: 'var(--talk-font-mono)',
+            fontSize: 'var(--fs-kicker)',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            color: 'var(--talk-muted)',
+            marginTop: '1.8cqh',
+          }}
+        >
+          Source · {content.source}
+        </p>
+      )}
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import type { BannermenSlide } from '../../data/slides'
+import { renderRich } from '../core/rich'
 
 /* Folio 14 — the bannermen. The tools that have "declared for House TypeScript",
    as an asymmetric wordmark wall (hand-built type, not sourced logos). */
@@ -42,15 +43,34 @@ export function BannermenScene({ content, subStep }: { content: BannermenSlide['
 
       <AnimatePresence>
         {subStep >= 1 && (
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45 }}
-            className="body"
-            style={{ marginTop: '5cqh', maxWidth: '60ch', borderLeft: '2px solid var(--talk-accent)', paddingLeft: '1.4cqw' }}
+            style={{ marginTop: '5cqh' }}
           >
-            MCP servers ship <span className="ts">~2.5× more on npm</span> than PyPI · schema authored TypeScript-first.
-          </motion.p>
+            <p
+              className="body"
+              style={{ maxWidth: '60ch', borderLeft: '2px solid var(--talk-accent)', paddingLeft: '1.4cqw' }}
+            >
+              {renderRich(content.callout)}
+            </p>
+            {content.source && (
+              <p
+                style={{
+                  fontFamily: 'var(--talk-font-mono)',
+                  fontSize: 'var(--fs-kicker)',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  color: 'var(--talk-muted)',
+                  marginTop: '1.6cqh',
+                  paddingLeft: '1.4cqw',
+                }}
+              >
+                Source · {content.source}
+              </p>
+            )}
+          </motion.div>
         )}
       </AnimatePresence>
     </div>
