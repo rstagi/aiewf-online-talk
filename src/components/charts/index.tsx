@@ -45,23 +45,23 @@ export function CrossoverLines() {
   )
 }
 
-// ── Folio 12 ─ AI SDK 7× growth ────────────────────────────────────────────
+// ── Folio 12 ─ AI SDK 9× growth ────────────────────────────────────────────
 export function GrowthLine() {
   const x = (t: number) => 140 + 560 * t
-  const y = (v: number) => 380 - (v / 3.4) * 300
-  const d = `M${x(0)} ${y(0.446)} C ${x(0.4)} ${y(0.7)}, ${x(0.7)} ${y(1.7)}, ${x(1)} ${y(3.2)}`
+  const y = (v: number) => 380 - (v / 16) * 300
+  const d = `M${x(0)} ${y(1.61)} C ${x(0.4)} ${y(3)}, ${x(0.7)} ${y(7.5)}, ${x(1)} ${y(15.1)}`
   return (
     <svg viewBox="0 0 800 420" width="100%" style={{ display: 'block', overflow: 'visible' }}>
       <line x1="140" y1="380" x2="700" y2="380" stroke="var(--talk-rule)" strokeWidth="2" />
-      <text x="140" y="406" textAnchor="middle" fill="var(--talk-muted)" {...TINY}>Oct ’24</text>
-      <text x="700" y="406" textAnchor="middle" fill="var(--talk-muted)" {...TINY}>Sep ’25</text>
+      <text x="140" y="406" textAnchor="middle" fill="var(--talk-muted)" {...TINY}>Jun ’25</text>
+      <text x="700" y="406" textAnchor="middle" fill="var(--talk-muted)" {...TINY}>Jun ’26</text>
 
       <path d={d} stroke="var(--talk-accent)" strokeWidth="5" fill="none" strokeLinecap="round" />
-      <circle cx={x(0)} cy={y(0.446)} r="6" fill="var(--talk-muted)" />
-      <text x={x(0)} y={y(0.446) + 34} textAnchor="middle" fill="var(--talk-muted)" {...LBL}>446K</text>
-      <circle cx={x(1)} cy={y(3.2)} r="9" fill="var(--talk-accent)" stroke="var(--talk-bg)" strokeWidth="2" />
-      <text x={x(1) - 8} y={y(3.2) - 18} textAnchor="end" fill="var(--talk-accent)" {...LBL}>3.2M / week</text>
-      <text x={x(1) - 8} y={y(3.2) + 6} textAnchor="end" fill="var(--talk-muted)" {...TINY}>~7× in a year</text>
+      <circle cx={x(0)} cy={y(1.61)} r="6" fill="var(--talk-muted)" />
+      <text x={x(0)} y={y(1.61) + 34} textAnchor="middle" fill="var(--talk-muted)" {...LBL}>1.6M</text>
+      <circle cx={x(1)} cy={y(15.1)} r="9" fill="var(--talk-accent)" stroke="var(--talk-bg)" strokeWidth="2" />
+      <text x={x(1) - 8} y={y(15.1) + 24} textAnchor="end" fill="var(--talk-accent)" {...LBL}>15.1M / week</text>
+      <text x={x(1) - 8} y={y(15.1) + 48} textAnchor="end" fill="var(--talk-muted)" {...TINY}>~9× in a year</text>
     </svg>
   )
 }

@@ -686,12 +686,12 @@ export const slides: Slide[] = [
     type: 'data',
     steps: 0,
     content: {
-      assertion: 'The TypeScript-only AI SDK grew about 7× in a single year.',
+      assertion: 'The TypeScript-only AI SDK grew about 9× in a single year.',
       chart: 'growth',
-      source: 'npm download counts · year to 30 Sep 2025',
+      source: 'npm weekly downloads · year to 14 Jun 2026',
     },
     notes: {
-      cues: ['“Vercel AI SDK · TS-only · ~7×” · anchor: 446K → 3.2M weekly'],
+      cues: ['“Vercel AI SDK · TS-only · ~9×” · anchor: 1.6M → 15.1M weekly'],
     },
   },
 
