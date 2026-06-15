@@ -73,6 +73,18 @@ export default function App() {
   const toggleNotes = useCallback(() => setNotesOpen(o => !o), [])
   useKeyboardNav({ onNext: next, onPrev: prev, onToggleNotes: toggleNotes, onGoTo: goTo })
 
+  // Tap to navigate (mainly for touch / mobile): right half advances, left half
+  // goes back. Interactive elements win — a tap on a link or button never
+  // triggers navigation, so the About-page links stay tappable.
+  const handleTap = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if ((e.target as HTMLElement).closest('a, button, [data-no-tap-nav]')) return
+      if (e.clientX < window.innerWidth / 2) prev()
+      else next()
+    },
+    [next, prev],
+  )
+
   const slide = slides[currentIndex]
   const oneBased = currentIndex + 1
   const chapter = chapterForSlide(oneBased)
@@ -80,7 +92,7 @@ export default function App() {
   const showChrome = slide.chrome !== false
 
   return (
-    <div className="deck">
+    <div className="deck" onClick={handleTap}>
       <SlideContainer slideKey={slide.id}>{renderScene(slide, subStep)}</SlideContainer>
 
       <RealmChrome

@@ -74,9 +74,36 @@ export function AboutScene({ content }: { content: AboutSlide['content'] }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        <p className="body muted"><span style={{ marginRight: '2cqw' }}>ratel.sh</span> • <span style={{ marginLeft: '2cqw' }}>aisocratic.org</span></p>
+        <p className="body muted">
+          <ContactLink href="https://ratel.sh" label="ratel.sh" />
+          <Sep />
+          <ContactLink href="https://aisocratic.org" label="aisocratic.org" />
+          <Sep />
+          <ContactLink href="https://www.linkedin.com/in/rstagi" label="in/rstagi" />
+          <Sep />
+          <ContactLink href="https://x.com/rstagi_" label="@rstagi_" />
+        </p>
       </motion.div>
     </div>
+  )
+}
+
+/* A small separator dot between contact links. */
+function Sep() {
+  return <span style={{ margin: '0 1.4cqw' }}>•</span>
+}
+
+/* A contact link — opens in a new tab, inherits the muted body tone. */
+function ContactLink({ href, label }: { href: string; label: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ color: 'inherit', textDecoration: 'none', borderBottom: '1px solid var(--talk-rule)' }}
+    >
+      {label}
+    </a>
   )
 }
 

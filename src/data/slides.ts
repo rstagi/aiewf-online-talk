@@ -64,6 +64,7 @@ export interface TitleSlide extends BaseSlide {
     byline: string
     closing?: boolean // the close slide — accent the callback word
     throneHolder?: HouseKey // override the title throne's holder (open uses 'unknown')
+    qr?: { src: string; caption?: string } // QR code shown on the right (e.g. link to the slides)
   }
 }
 
@@ -804,6 +805,7 @@ export const slides: Slide[] = [
       title: 'Thank you.',
       byline: 'Roberto Stagi · Ratel · ratel.sh',
       closing: true,
+      qr: { src: 'slides-qr.png', caption: 'Get the slides' },
     },
     notes: {
       line: '“Skip TypeScript now, and you might fall behind. [PAUSE] Thank you.”',

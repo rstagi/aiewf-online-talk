@@ -54,6 +54,32 @@ export function TitleScene({ content, subStep = 0 }: { content: TitleSlide['cont
         transition={{ duration: 0.7, delay: 0.15 }}
       >
         <Throne holder={holder} width="26cqw" hushed={!content.closing} />
+        {content.qr && (
+          <motion.div
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.9cqw' }}
+            initial={false}
+            animate={{ opacity: titleShown ? 1 : 0, y: titleShown ? 0 : 10 }}
+            transition={{ duration: 0.5, delay: 0.08 }}
+          >
+            <img
+              src={`${import.meta.env.BASE_URL}${content.qr.src}`}
+              alt={content.qr.caption ?? 'QR code'}
+              style={{
+                width: '11cqw',
+                height: '11cqw',
+                borderRadius: '6px',
+                background: 'var(--talk-surface)',
+                padding: '0.7cqw',
+                border: '1px solid var(--talk-rule)',
+              }}
+            />
+            {content.qr.caption && (
+              <span style={{ fontFamily: 'var(--talk-font-display)', fontSize: '1.5cqw', color: 'var(--talk-muted)', letterSpacing: '0.04em' }}>
+                {content.qr.caption}
+              </span>
+            )}
+          </motion.div>
+        )}
         {showSigils && (
           <div style={{ display: 'flex', gap: '2.4cqw', alignItems: 'flex-end' }}>
             <HouseSigil house="js" size="5cqw" />
